@@ -11,7 +11,7 @@ import (
 func getCOCampaigns(fargs CCFuncArgs) pb.Response {
 	fmt.Println("starting getCOCampaigns")
 
-	var qparams = &CampaignQueryParams{}
+	var qparams = &CampaignParams{}
 	err := json.Unmarshal([]byte(fargs.req.Params), qparams)
 	if err != nil {
 		return shim.Error("[getCOCampaigns] Error unable to unmarshall msg: " + err.Error())
@@ -29,23 +29,14 @@ func getCOCampaigns(fargs CCFuncArgs) pb.Response {
 		return shim.Error("[getCOCampaigns] Error unable to GetQueryResult: " + err.Error())
 	}
 
-	type qres struct {
-		Key   string `json:"key"`
-		Value string `json:"value"`
-	}
-
-	type qrsp struct {
-		Elem []qres `json:"elem"`
-	}
-
-	var qresp = qrsp{}
+	var qresp = QRsp{}
 	for resultsIterator.HasNext() {
 		queryResponse, err := resultsIterator.Next()
 		if err != nil {
 			return shim.Error("[getCOCampaigns] Error unable to get next item in iterator: " + err.Error())
 		}
 
-		q := qres{Key: queryResponse.Key, Value: string(queryResponse.Value)}
+		q := QRes{Key: queryResponse.Key, Value: string(queryResponse.Value)}
 		qresp.Elem = append(qresp.Elem, q)
 	}
 

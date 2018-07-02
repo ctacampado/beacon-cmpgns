@@ -11,7 +11,7 @@ import (
 //CCFuncArgs common cc func args
 type CCFuncArgs struct {
 	function string
-	req      COCCMessage
+	req      Message
 	stub     shim.ChaincodeStubInterface
 }
 
@@ -20,11 +20,11 @@ type ccfunc func(args CCFuncArgs) pb.Response
 //Chaincode cc structure
 type Chaincode struct {
 	FMap map[string]ccfunc //ccfunc map
-	Msg  COCCMessage       //data
+	Msg  Message           //data
 }
 
 //COCCMessage Charity Org Chain Code Message Structure
-type COCCMessage struct {
+type Message struct {
 	CID    string `json:"CID"`    //ClientID --for websocket push (event-based messaging readyness)
 	AID    string `json:"AID"`    //ActorID (Donor ID/Charity Org ID/Auditor ID/etc.)
 	Type   string `json:"type"`   //Chaincode Function
@@ -35,17 +35,33 @@ type COCCMessage struct {
 //--------------------------------------------------------------------------
 //Start adding Query Parameter (Parm) Structures here
 
+type QRes struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
+}
+
+type QRsp struct {
+	Elem []QRes `json:"elem"`
+}
+
 //CampaignQueryParams Structure for Query Parameters
-type CampaignQueryParams struct {
-	CharityID     string `json:"CharityID,omitempty"`
-	CampaignID    string `json:"CampaignID,omitempty"`
-	Status        int    `json:"Status,omitempty"`
-	CampStartDate string `json:"CampStartDate,omitempty"`
+type CampaignParams struct {
+	CharityID       string `json:"CharityID,omitempty"`
+	CampaignID      string `json:"CampaignID,omitempty"`
+	Status          int    `json:"Status,omitempty"`
+	CampStartDate   string `json:"CampStartDate,omitempty"`
+	DonatedAmount   string `json:"DonatedAmount, omitempty"`
+	DisbursedAmount string `json:"DisbursedAmount, omitempty"`
+	RatingFive      int    `json:"RatingFive, omitempty"`
+	RatingFour      int    `json:"RatingFour, omitempty"`
+	RatingThree     int    `json:"RatingThree, omitempty"`
+	RatingTwo       int    `json:"RatingTwo, omitempty"`
+	RatingOne       int    `json:"RatingOne, omitempty"`
 }
 
 //COCCQuerySelector Structure for Query Selector
 type CampaignQuerySelector struct {
-	Selector CampaignQueryParams `json:"selector"`
+	Selector CampaignParams `json:"selector"`
 }
 
 //End of Query Paramter Structures
@@ -71,7 +87,7 @@ type CampaignInfo struct {
 	CharityID       string     `json:"CharityID"`
 	CampaignName    string     `json:"CampaignName"`
 	Description     string     `json:"Description"`
-	CampaignCaption string     `json:"CampaignCaption", omitempty`
+	CampaignCaption string     `json:"CampaignCaption, omitempty"`
 	CampStartDate   string     `json:"CampStartDate"`
 	CampEndDate     string     `json:"CampEndDate"`
 	CampCompDate    string     `json:"CampCompDate, omitempty"`
@@ -79,12 +95,12 @@ type CampaignInfo struct {
 	Status          CampStatus `json:"Status"`
 	CampaignAmount  string     `json:"CampaignAmount"`
 	DonatedAmount   string     `json:"DonatedAmount, omitempty"`
-	TransAmount     string     `json:"TransAmount, omitempty"`
-	RatingFive      string     `json:"RatingFive, omitempty"`
-	RatingFour      string     `json:"RatingFour, omitempty"`
-	RatingThree     string     `json:"RatingThree, omitempty"`
-	RatingTwo       string     `json:"RatingTwo, omitempty"`
-	RatingOne       string     `json:"RatingOne, omitempty"`
+	DisbursedAmount string     `json:"DisbursedAmount, omitempty"`
+	RatingFive      int        `json:"RatingFive, omitempty"`
+	RatingFour      int        `json:"RatingFour, omitempty"`
+	RatingThree     int        `json:"RatingThree, omitempty"`
+	RatingTwo       int        `json:"RatingTwo, omitempty"`
+	RatingOne       int        `json:"RatingOne, omitempty"`
 }
 
 //End of Data Models

@@ -25,13 +25,13 @@ func addCampaign(fargs CCFuncArgs) pb.Response {
 
 	c.Status = 1
 	c.DonatedAmount = "0"
-	c.TransAmount = "0"
-	c.CampCompDate = "n/a"
-	c.RatingFive = "0"
-	c.RatingFour = "0"
-	c.RatingThree = "0"
-	c.RatingTwo = "0"
-	c.RatingOne = "0"
+	c.DisbursedAmount = "0"
+	c.CampCompDate = "-"
+	c.RatingFive = 0
+	c.RatingFour = 0
+	c.RatingThree = 0
+	c.RatingTwo = 0
+	c.RatingOne = 0
 
 	log.Printf("[addCampaign ] campaign info: %+v\n", c)
 
