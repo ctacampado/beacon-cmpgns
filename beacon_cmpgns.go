@@ -20,6 +20,7 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	t.FMap = map[string]ccfunc{
 		"addCampaign":    addCampaign,
 		"getCOCampaigns": getCOCampaigns,
+		"modifyCampaign": modifyCampaign,
 	}
 
 	function, args := stub.GetFunctionAndParameters()
