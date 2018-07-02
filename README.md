@@ -1,0 +1,2 @@
+# beacon-cmpgns
+campaigns chaincode
