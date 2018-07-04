@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 
 	shim "github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
@@ -22,6 +23,7 @@ func getCOCampaigns(fargs CCFuncArgs) pb.Response {
 		return shim.Error("[getCOCampaigns] Error unable to create query string: " + err.Error())
 	}
 
+	log.Printf("[getIdentity] query using querystring: %+v\n", qparams)
 	resultsIterator, err := fargs.stub.GetQueryResult(qstring)
 	fmt.Printf("- getQueryResultForQueryString resultsIterator:\n%+v\n", resultsIterator)
 	defer resultsIterator.Close()

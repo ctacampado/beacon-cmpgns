@@ -29,6 +29,9 @@ func applyIdentityModsFromParam(src *CampaignParams, dest *CampaignInfo) {
 		srcamt, _ := strconv.ParseFloat(src.DonatedAmount, 64)
 		dest.DonatedAmount = FloatToString(srcamt + dstamt)
 	}
+	if "" != src.Status {
+		dest.Status = src.Status
+	}
 	if "" != src.DisbursedAmount {
 		dstamt, _ := strconv.ParseFloat(dest.DisbursedAmount, 64)
 		srcamt, _ := strconv.ParseFloat(src.DisbursedAmount, 64)

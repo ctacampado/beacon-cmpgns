@@ -23,7 +23,7 @@ func addCampaign(fargs CCFuncArgs) pb.Response {
 		return shim.Error("[addCampaign] Error unable to unmarshall msg: " + err.Error())
 	}
 
-	c.Status = 1
+	c.Status = "PLEDGE"
 	c.DonatedAmount = "0"
 	c.DisbursedAmount = "0"
 	c.CampCompDate = "-"
@@ -41,7 +41,7 @@ func addCampaign(fargs CCFuncArgs) pb.Response {
 		return shim.Error(err.Error())
 	}
 
-	err = fargs.stub.PutState(campaignID, bytes)
+	err = fargs.stub.PutState(c.CampaignID, bytes)
 	if err != nil {
 		log.Printf("[addCampaign] Error storing data in the ledger %+v\n", err)
 		return shim.Error(err.Error())

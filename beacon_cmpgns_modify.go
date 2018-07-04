@@ -15,18 +15,18 @@ func modifyCampaign(fargs CCFuncArgs) pb.Response {
 	var qparams = &CampaignParams{}
 	err := json.Unmarshal([]byte(fargs.req.Params), qparams)
 	if err != nil {
-		return shim.Error("[modifyCampaign] Error unable to unmarshall msg: " + err.Error())
+		return shim.Error("[modifyCampaign] Error unable to unmarshall Params: " + err.Error())
 	}
 
 	var qp = &CampaignParams{CampaignID: qparams.CampaignID}
 	qpbytes, err := json.Marshal(*qp)
 	if err != nil {
-		log.Printf("[modifyCampaign] Could not marshal campaign info object: %+v\n", err)
+		log.Printf("[modifyCampaign] Could not marshal campaignParams: %+v\n", err)
 		return shim.Error(err.Error())
 	}
 
 	var qresp = &QRsp{}
-	qr := getCOCampaigns(CCFuncArgs{req: Message{Params: string(qpbytes)}})
+	qr := getCOCampaigns(CCFuncArgs{stub: fargs.stub, req: Message{Params: string(qpbytes)}})
 	err = json.Unmarshal([]byte(qr.Payload), qresp)
 	if err != nil {
 		return shim.Error("[modifyCampaign] Error unable to unmarshall msg: " + err.Error())
@@ -46,7 +46,7 @@ func modifyCampaign(fargs CCFuncArgs) pb.Response {
 		return shim.Error(err.Error())
 	}
 
-	err = fargs.stub.PutState(fargs.req.AID, cbytes)
+	err = fargs.stub.PutState(campaign.CampaignID, cbytes)
 	if err != nil {
 		log.Printf("[modifyCampaign] Error storing data in the ledger %+v\n", err)
 		return shim.Error(err.Error())

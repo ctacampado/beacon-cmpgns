@@ -48,15 +48,15 @@ type QRsp struct {
 type CampaignParams struct {
 	CharityID       string `json:"CharityID,omitempty"`
 	CampaignID      string `json:"CampaignID,omitempty"`
-	Status          int    `json:"Status,omitempty"`
+	Status          string `json:"Status,omitempty"`
 	CampStartDate   string `json:"CampStartDate,omitempty"`
-	DonatedAmount   string `json:"DonatedAmount, omitempty"`
-	DisbursedAmount string `json:"DisbursedAmount, omitempty"`
-	RatingFive      int    `json:"RatingFive, omitempty"`
-	RatingFour      int    `json:"RatingFour, omitempty"`
-	RatingThree     int    `json:"RatingThree, omitempty"`
-	RatingTwo       int    `json:"RatingTwo, omitempty"`
-	RatingOne       int    `json:"RatingOne, omitempty"`
+	DonatedAmount   string `json:"DonatedAmount,omitempty"`
+	DisbursedAmount string `json:"DisbursedAmount,omitempty"`
+	RatingFive      int    `json:"RatingFive,omitempty"`
+	RatingFour      int    `json:"RatingFour,omitempty"`
+	RatingThree     int    `json:"RatingThree,omitempty"`
+	RatingTwo       int    `json:"RatingTwo,omitempty"`
+	RatingOne       int    `json:"RatingOne,omitempty"`
 }
 
 //COCCQuerySelector Structure for Query Selector
@@ -68,39 +68,35 @@ type CampaignQuerySelector struct {
 //--------------------------------------------------------------------------
 //Start adding Data Models here
 
-//CampStatus type for Enum
-type CampStatus int
-
-//Campaign Status Enum
-const (
-	PLEDGE CampStatus = 1 + iota
-	DISBURSE
-	COMPLETED
-	NEW
-	CANCELED
-)
+/****Campaign Status
+    PLEDGE
+		DISBURSE
+		COMPLETED
+		NEW -- if ever we want to have an approval as prerequisite to launching
+		CANCELED
+****/
 
 //CampaignInfo data model
 type CampaignInfo struct {
-	CampaignID      string     `json:"CampaignID, omitempty"`
-	CharityName     string     `json:"CharityName, omitempty"`
-	CharityID       string     `json:"CharityID"`
-	CampaignName    string     `json:"CampaignName"`
-	Description     string     `json:"Description"`
-	CampaignCaption string     `json:"CampaignCaption, omitempty"`
-	CampStartDate   string     `json:"CampStartDate"`
-	CampEndDate     string     `json:"CampEndDate"`
-	CampCompDate    string     `json:"CampCompDate, omitempty"`
-	CampaignPhoto   string     `json:"CampaignPhoto, omitempty"`
-	Status          CampStatus `json:"Status"`
-	CampaignAmount  string     `json:"CampaignAmount"`
-	DonatedAmount   string     `json:"DonatedAmount, omitempty"`
-	DisbursedAmount string     `json:"DisbursedAmount, omitempty"`
-	RatingFive      int        `json:"RatingFive, omitempty"`
-	RatingFour      int        `json:"RatingFour, omitempty"`
-	RatingThree     int        `json:"RatingThree, omitempty"`
-	RatingTwo       int        `json:"RatingTwo, omitempty"`
-	RatingOne       int        `json:"RatingOne, omitempty"`
+	CampaignID      string `json:"CampaignID,omitempty"`
+	CharityName     string `json:"CharityName,omitempty"`
+	CharityID       string `json:"CharityID"`
+	CampaignName    string `json:"CampaignName"`
+	Description     string `json:"Description"`
+	CampaignCaption string `json:"CampaignCaption,omitempty"`
+	CampStartDate   string `json:"CampStartDate"`
+	CampEndDate     string `json:"CampEndDate"`
+	CampCompDate    string `json:"CampCompDate,omitempty"`
+	CampaignPhoto   string `json:"CampaignPhoto,omitempty"`
+	Status          string `json:"Status"`
+	CampaignAmount  string `json:"CampaignAmount"`
+	DonatedAmount   string `json:"DonatedAmount,omitempty"`
+	DisbursedAmount string `json:"DisbursedAmount,omitempty"`
+	RatingFive      int    `json:"RatingFive,omitempty"`
+	RatingFour      int    `json:"RatingFour,omitempty"`
+	RatingThree     int    `json:"RatingThree,omitempty"`
+	RatingTwo       int    `json:"RatingTwo,omitempty"`
+	RatingOne       int    `json:"RatingOne,omitempty"`
 }
 
 //End of Data Models
