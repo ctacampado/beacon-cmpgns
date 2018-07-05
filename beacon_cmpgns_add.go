@@ -18,7 +18,7 @@ func addCampaign(fargs CCFuncArgs) pb.Response {
 
 	c := CampaignInfo{CampaignID: campaignID}
 
-	err := json.Unmarshal([]byte(fargs.req.Params), &c)
+	err := json.Unmarshal([]byte(fargs.msg.Params), &c)
 	if err != nil {
 		return shim.Error("[addCampaign] Error unable to unmarshall msg: " + err.Error())
 	}
@@ -47,6 +47,8 @@ func addCampaign(fargs CCFuncArgs) pb.Response {
 		return shim.Error(err.Error())
 	}
 
+	fargs.msg.Data = bytes
+	rspbytes, err := json.Marshal(fargs)
 	fmt.Println("- end addCampaign")
-	return shim.Success(nil) //change nil to appropriate response
+	return shim.Success(rspbytes) //change nil to appropriate response
 }

@@ -13,7 +13,7 @@ func getCOCampaigns(fargs CCFuncArgs) pb.Response {
 	fmt.Println("starting getCOCampaigns")
 
 	var qparams = &CampaignParams{}
-	err := json.Unmarshal([]byte(fargs.req.Params), qparams)
+	err := json.Unmarshal([]byte(fargs.msg.Params), qparams)
 	if err != nil {
 		return shim.Error("[getCOCampaigns] Error unable to unmarshall msg: " + err.Error())
 	}

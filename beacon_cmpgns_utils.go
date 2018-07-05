@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"strconv"
 )
 
@@ -25,9 +26,20 @@ func createQueryString(params *CampaignParams) (qstring string, err error) {
 
 func applyIdentityModsFromParam(src *CampaignParams, dest *CampaignInfo) {
 	if "" != src.DonatedAmount {
-		dstamt, _ := strconv.ParseFloat(dest.DonatedAmount, 64)
-		srcamt, _ := strconv.ParseFloat(src.DonatedAmount, 64)
-		dest.DonatedAmount = FloatToString(srcamt + dstamt)
+		dstamt, err := strconv.ParseFloat(dest.DonatedAmount, 64)
+		if err != nil {
+			log.Printf("Error converting dest.DonatedAmount to float! %+v\n", err)
+		}
+		log.Printf("dstamt: %f\n", dstamt)
+		srcamt, err := strconv.ParseFloat(src.DonatedAmount, 64)
+		if err != nil {
+			log.Printf("Error converting src.DonatedAmount to float! %+v\n", err)
+		}
+		log.Printf("srcamt: %f\n", srcamt)
+		newamt := srcamt + dstamt
+		log.Printf("newamt: %f\n", newamt)
+		dest.DonatedAmount = FloatToString(newamt)
+		log.Printf("dstamt: %s\n", dest.DonatedAmount)
 	}
 	if "" != src.Status {
 		dest.Status = src.Status

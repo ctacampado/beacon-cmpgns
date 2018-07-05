@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 
 	shim "github.com/hyperledger/fabric/core/chaincode/shim"
@@ -13,7 +14,7 @@ func modifyCampaign(fargs CCFuncArgs) pb.Response {
 
 	//get identity to be modified
 	var qparams = &CampaignParams{}
-	err := json.Unmarshal([]byte(fargs.req.Params), qparams)
+	err := json.Unmarshal([]byte(fargs.msg.Params), qparams)
 	if err != nil {
 		return shim.Error("[modifyCampaign] Error unable to unmarshall Params: " + err.Error())
 	}
@@ -26,21 +27,21 @@ func modifyCampaign(fargs CCFuncArgs) pb.Response {
 	}
 
 	var qresp = &QRsp{}
-	qr := getCOCampaigns(CCFuncArgs{stub: fargs.stub, req: Message{Params: string(qpbytes)}})
+	qr := getCOCampaigns(CCFuncArgs{stub: fargs.stub, msg: Message{Params: string(qpbytes)}})
 	err = json.Unmarshal([]byte(qr.Payload), qresp)
 	if err != nil {
 		return shim.Error("[modifyCampaign] Error unable to unmarshall msg: " + err.Error())
 	}
 
-	var campaign = &CampaignInfo{}
-	err = json.Unmarshal([]byte(qresp.Elem[0].Value), campaign)
+	var campaign = CampaignInfo{}
+	err = json.Unmarshal([]byte(qresp.Elem[0].Value), &campaign)
 	if err != nil {
 		return shim.Error("[modifyCampaign] Error unable to unmarshall msg: " + err.Error())
 	}
 
-	applyIdentityModsFromParam(qparams, campaign)
-
-	cbytes, err := json.Marshal(*campaign)
+	applyIdentityModsFromParam(qparams, &campaign)
+	log.Printf("campaign: %+v\n", campaign)
+	cbytes, err := json.Marshal(campaign)
 	if err != nil {
 		log.Printf("[modifyCampaign] Could not marshal campaign info object: %+v\n", err)
 		return shim.Error(err.Error())
@@ -52,5 +53,8 @@ func modifyCampaign(fargs CCFuncArgs) pb.Response {
 		return shim.Error(err.Error())
 	}
 
-	return shim.Success(nil) //change nil to appropriate response
+	fargs.msg.Data = cbytes
+	rspbytes, err := json.Marshal(fargs)
+	fmt.Printf("- end modifyCampaign")
+	return shim.Success(rspbytes) //change nil to appropriate response
 }
