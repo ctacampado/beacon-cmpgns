@@ -29,7 +29,7 @@ type Message struct {
 	AID    string `json:"AID"`    //ActorID (Donor ID/Charity Org ID/Auditor ID/etc.)
 	Type   string `json:"type"`   //Client Type
 	Params string `json:"params"` //Function Parameters
-	Data   []byte `json:"data,omitempty"`
+	Data   string `json:"data,omitempty"`
 }
 
 //End of Chaincode-related Structures

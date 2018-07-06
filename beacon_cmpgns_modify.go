@@ -53,8 +53,9 @@ func modifyCampaign(fargs CCFuncArgs) pb.Response {
 		return shim.Error(err.Error())
 	}
 
-	fargs.msg.Data = cbytes
-	rspbytes, err := json.Marshal(fargs)
+	fargs.msg.Data = string(cbytes)
+	rspbytes, err := json.Marshal(fargs.msg)
 	fmt.Printf("- end modifyCampaign")
+	fargs.stub.SetEvent("modify",rspbytes)
 	return shim.Success(rspbytes) //change nil to appropriate response
 }

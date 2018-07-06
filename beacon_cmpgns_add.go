@@ -40,15 +40,21 @@ func addCampaign(fargs CCFuncArgs) pb.Response {
 		log.Printf("[addCampaign] Could not marshal campaign info object: %+v\n", err)
 		return shim.Error(err.Error())
 	}
-
+	log.Printf("bytes: %+v\n", bytes)
 	err = fargs.stub.PutState(c.CampaignID, bytes)
 	if err != nil {
 		log.Printf("[addCampaign] Error storing data in the ledger %+v\n", err)
 		return shim.Error(err.Error())
 	}
-
-	fargs.msg.Data = bytes
-	rspbytes, err := json.Marshal(fargs)
+	fargs.msg.Data = string(bytes)
+	log.Printf("fargs: %+v\n", fargs.msg)
+	rspbytes, err := json.Marshal(fargs.msg)
+	if err != nil {
+		log.Printf("[addCampaign] Could not marshal fargs object: %+v\n", err)
+		return shim.Error(err.Error())
+	}
 	fmt.Println("- end addCampaign")
+	fargs.stub.SetEvent("add", rspbytes)
+	log.Printf("rspbytes: %+v\n", rspbytes)
 	return shim.Success(rspbytes) //change nil to appropriate response
 }
