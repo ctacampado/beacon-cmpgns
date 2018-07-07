@@ -13,10 +13,12 @@ func getCOCampaigns(fargs CCFuncArgs) pb.Response {
 	fmt.Println("starting getCOCampaigns")
 
 	var qparams = &CampaignParams{}
+	log.Printf("qparams start: %+v\n", qparams)
 	err := json.Unmarshal([]byte(fargs.msg.Params), qparams)
 	if err != nil {
 		return shim.Error("[getCOCampaigns] Error unable to unmarshall msg: " + err.Error())
 	}
+	log.Printf("qparams after unmarshall: %+v\n", qparams)
 
 	qstring, err := createQueryString(qparams)
 	if err != nil {

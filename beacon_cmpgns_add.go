@@ -54,7 +54,7 @@ func addCampaign(fargs CCFuncArgs) pb.Response {
 		return shim.Error(err.Error())
 	}
 	fmt.Println("- end addCampaign")
-	fargs.stub.SetEvent("add", rspbytes)
+	fargs.stub.SetEvent("newcmpgns", rspbytes)
 	log.Printf("rspbytes: %+v\n", rspbytes)
 	return shim.Success(rspbytes) //change nil to appropriate response
 }

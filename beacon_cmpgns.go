@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
@@ -27,7 +28,7 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting key of the var to query")
 	}
-	fmt.Printf("In Invoke with function %s", function)
+	log.Printf("In Invoke with function %s", function)
 
 	//extract message from args
 	err := json.Unmarshal([]byte(args[0]), &t.Msg)
@@ -40,15 +41,15 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return t.FMap[function](fargs)
 	}
 
-	fmt.Printf("BEACON Received unknown invoke function name - %s" + function)
+	log.Printf("BEACON Received unknown invoke function name - %s" + function)
 	return shim.Error("BEACON Received unknown invoke function name - '" + function + "'")
 }
 
 func main() {
 	err := shim.Start(new(Chaincode))
 	if err != nil {
-		fmt.Printf("Error starting BEACON chaincode: %s", err)
+		log.Printf("Error starting BEACON chaincode: %s", err)
 	} else {
-		fmt.Printf("BEACON Chaincode successfully started")
+		log.Printf("BEACON Chaincode successfully started")
 	}
 }

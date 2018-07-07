@@ -27,6 +27,7 @@ type Chaincode struct {
 type Message struct {
 	CID    string `json:"CID"`    //ClientID --for websocket push (event-based messaging readyness)
 	AID    string `json:"AID"`    //ActorID (Donor ID/Charity Org ID/Auditor ID/etc.)
+	Func   string `json:"function,omitempty"`
 	Type   string `json:"type"`   //Client Type
 	Params string `json:"params"` //Function Parameters
 	Data   string `json:"data,omitempty"`

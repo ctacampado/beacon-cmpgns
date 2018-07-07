@@ -10,7 +10,7 @@ import (
 )
 
 func modifyCampaign(fargs CCFuncArgs) pb.Response {
-	log.Printf("starting modifyIdentity\n")
+	log.Printf("starting modifyCampaign\n")
 
 	//get identity to be modified
 	var qparams = &CampaignParams{}
@@ -56,6 +56,6 @@ func modifyCampaign(fargs CCFuncArgs) pb.Response {
 	fargs.msg.Data = string(cbytes)
 	rspbytes, err := json.Marshal(fargs.msg)
 	fmt.Printf("- end modifyCampaign")
-	fargs.stub.SetEvent("modify",rspbytes)
+	fargs.stub.SetEvent("modcmpgns",rspbytes)
 	return shim.Success(rspbytes) //change nil to appropriate response
 }
