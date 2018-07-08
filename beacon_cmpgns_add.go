@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"time"
 
 	shim "github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
@@ -16,7 +17,7 @@ func addCampaign(fargs CCFuncArgs) pb.Response {
 	u := uuid.Must(uuid.NewV4())
 	var campaignID = u.String()
 
-	c := CampaignInfo{CampaignID: campaignID}
+	c := CampaignInfo{CampaignID: campaignID, DateCreated: string(time.Now().Format("2006-Jan-02"))}
 
 	err := json.Unmarshal([]byte(fargs.msg.Params), &c)
 	if err != nil {

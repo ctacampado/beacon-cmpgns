@@ -99,6 +99,8 @@ type CampaignInfo struct {
 	RatingThree     int    `json:"RatingThree,omitempty"`
 	RatingTwo       int    `json:"RatingTwo,omitempty"`
 	RatingOne       int    `json:"RatingOne,omitempty"`
+	DateCreated	string `json:"DateCreated,omitempty"`
+	LastModified	string `json:"LastModified,omitempty"`
 }
 
 //End of Data Models

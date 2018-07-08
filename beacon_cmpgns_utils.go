@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"strconv"
+	"time"
 )
 
 func FloatToString(input_num float64) string {
@@ -64,4 +65,5 @@ func applyIdentityModsFromParam(src *CampaignParams, dest *CampaignInfo) {
 	if 0 != src.RatingOne {
 		dest.RatingOne++
 	}
+	dest.LastModified = string(time.Now().Format("2006-Jan-02"))
 }
