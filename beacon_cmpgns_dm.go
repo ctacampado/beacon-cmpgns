@@ -52,6 +52,7 @@ type CampaignParams struct {
 	CampaignID      string `json:"CampaignID,omitempty"`
 	Status          string `json:"Status,omitempty"`
 	CampStartDate   string `json:"CampStartDate,omitempty"`
+	CampEndDate	string `json:"CampEndDate,omitempty"`
 	DonatedAmount   string `json:"DonatedAmount,omitempty"`
 	DisbursedAmount string `json:"DisbursedAmount,omitempty"`
 	RatingFive      int    `json:"RatingFive,omitempty"`
@@ -59,6 +60,7 @@ type CampaignParams struct {
 	RatingThree     int    `json:"RatingThree,omitempty"`
 	RatingTwo       int    `json:"RatingTwo,omitempty"`
 	RatingOne       int    `json:"RatingOne,omitempty"`
+	WalletAddr	string `json:"WalletAddr,omitempty"`
 }
 
 //COCCQuerySelector Structure for Query Selector
@@ -101,6 +103,7 @@ type CampaignInfo struct {
 	RatingOne       int    `json:"RatingOne,omitempty"`
 	DateCreated	string `json:"DateCreated,omitempty"`
 	LastModified	string `json:"LastModified,omitempty"`
+	WalletAddr	string `json:"WalletAddr,omitempty"`
 }
 
 //End of Data Models

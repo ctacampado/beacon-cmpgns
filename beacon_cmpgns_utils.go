@@ -65,5 +65,8 @@ func applyIdentityModsFromParam(src *CampaignParams, dest *CampaignInfo) {
 	if 0 != src.RatingOne {
 		dest.RatingOne++
 	}
+	if "" != src.CampEndDate {
+		dest.CampEndDate = src.CampEndDate
+	}
 	dest.LastModified = string(time.Now().Format("2006-Jan-02"))
 }
