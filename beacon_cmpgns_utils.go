@@ -69,4 +69,5 @@ func applyIdentityModsFromParam(src *CampaignParams, dest *CampaignInfo) {
 		dest.CampEndDate = src.CampEndDate
 	}
 	dest.LastModified = string(time.Now().Format("2006-Jan-02"))
+	dest.WalletAddr = src.WalletAddr
 }
