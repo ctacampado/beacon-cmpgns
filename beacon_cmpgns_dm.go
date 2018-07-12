@@ -25,8 +25,8 @@ type Chaincode struct {
 
 //COCCMessage Charity Org Chain Code Message Structure
 type Message struct {
-	CID    string `json:"CID"`    //ClientID --for websocket push (event-based messaging readyness)
-	AID    string `json:"AID"`    //ActorID (Donor ID/Charity Org ID/Auditor ID/etc.)
+	CID    string `json:"CID"` //ClientID --for websocket push (event-based messaging readyness)
+	AID    string `json:"AID"` //ActorID (Donor ID/Charity Org ID/Auditor ID/etc.)
 	Func   string `json:"function,omitempty"`
 	Type   string `json:"type"`   //Client Type
 	Params string `json:"params"` //Function Parameters
@@ -52,7 +52,7 @@ type CampaignParams struct {
 	CampaignID      string `json:"CampaignID,omitempty"`
 	Status          string `json:"Status,omitempty"`
 	CampStartDate   string `json:"CampStartDate,omitempty"`
-	CampEndDate	string `json:"CampEndDate,omitempty"`
+	CampEndDate     string `json:"CampEndDate,omitempty"`
 	DonatedAmount   string `json:"DonatedAmount,omitempty"`
 	DisbursedAmount string `json:"DisbursedAmount,omitempty"`
 	RatingFive      int    `json:"RatingFive,omitempty"`
@@ -60,7 +60,8 @@ type CampaignParams struct {
 	RatingThree     int    `json:"RatingThree,omitempty"`
 	RatingTwo       int    `json:"RatingTwo,omitempty"`
 	RatingOne       int    `json:"RatingOne,omitempty"`
-	WalletAddr	string `json:"WalletAddr,omitempty"`
+	ResultSummary   string `json:"ResultSummary,omitempty"`
+	WalletAddr      string `json:"WalletAddr,omitempty"`
 }
 
 //COCCQuerySelector Structure for Query Selector
@@ -87,7 +88,7 @@ type CampaignInfo struct {
 	CharityID       string `json:"CharityID"`
 	CampaignName    string `json:"CampaignName"`
 	Description     string `json:"Description"`
-	CampaignCaption string `json:"CampaignCaption,omitempty"`
+	ResultSummary   string `json:"CampaignCaption,omitempty"`
 	CampStartDate   string `json:"CampStartDate"`
 	CampEndDate     string `json:"CampEndDate"`
 	CampCompDate    string `json:"CampCompDate,omitempty"`
@@ -101,9 +102,9 @@ type CampaignInfo struct {
 	RatingThree     int    `json:"RatingThree,omitempty"`
 	RatingTwo       int    `json:"RatingTwo,omitempty"`
 	RatingOne       int    `json:"RatingOne,omitempty"`
-	DateCreated	string `json:"DateCreated,omitempty"`
-	LastModified	string `json:"LastModified,omitempty"`
-	WalletAddr	string `json:"WalletAddr,omitempty"`
+	DateCreated     string `json:"DateCreated,omitempty"`
+	LastModified    string `json:"LastModified,omitempty"`
+	WalletAddr      string `json:"WalletAddr,omitempty"`
 }
 
 //End of Data Models
