@@ -52,6 +52,7 @@ type CampaignParams struct {
 	CampaignID      string `json:"CampaignID,omitempty"`
 	Status          string `json:"Status,omitempty"`
 	CampStartDate   string `json:"CampStartDate,omitempty"`
+	CampCompDate    string `json:"CampCompDate,omitempty"`
 	CampEndDate     string `json:"CampEndDate,omitempty"`
 	DonatedAmount   string `json:"DonatedAmount,omitempty"`
 	DisbursedAmount string `json:"DisbursedAmount,omitempty"`

@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 
 	shim "github.com/hyperledger/fabric/core/chaincode/shim"
@@ -55,7 +54,12 @@ func modifyCampaign(fargs CCFuncArgs) pb.Response {
 
 	fargs.msg.Data = string(cbytes)
 	rspbytes, err := json.Marshal(fargs.msg)
-	fmt.Printf("- end modifyCampaign")
-	fargs.stub.SetEvent("modcmpgns",rspbytes)
+	if err != nil {
+		log.Printf("[modifyCampaign] Error marshaling fargs.msg:  %+v\n", err)
+		return shim.Error(err.Error())
+	}
+	log.Printf("- end modifyCampaign")
+	fargs.stub.SetEvent("modcmpgns", rspbytes)
+	log.Printf("rspbytes: %+v\n", rspbytes)
 	return shim.Success(rspbytes) //change nil to appropriate response
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"time"
 
@@ -54,7 +53,7 @@ func addCampaign(fargs CCFuncArgs) pb.Response {
 		log.Printf("[addCampaign] Could not marshal fargs object: %+v\n", err)
 		return shim.Error(err.Error())
 	}
-	fmt.Println("- end addCampaign")
+	log.Println("- end addCampaign")
 	fargs.stub.SetEvent("newcmpgns", rspbytes)
 	log.Printf("rspbytes: %+v\n", rspbytes)
 	return shim.Success(rspbytes) //change nil to appropriate response
