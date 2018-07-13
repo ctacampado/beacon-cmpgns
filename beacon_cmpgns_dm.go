@@ -89,7 +89,7 @@ type CampaignInfo struct {
 	CharityID       string `json:"CharityID"`
 	CampaignName    string `json:"CampaignName"`
 	Description     string `json:"Description"`
-	ResultSummary   string `json:"CampaignCaption,omitempty"`
+	ResultSummary   string `json:"ResultSummary,omitempty"`
 	CampStartDate   string `json:"CampStartDate"`
 	CampEndDate     string `json:"CampEndDate"`
 	CampCompDate    string `json:"CampCompDate,omitempty"`
